@@ -104,6 +104,12 @@ public protocol BarcodeScannerViewDelegate {
 
     self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     self.videoPreviewLayer?.frame = self.bounds
+    
+    // Add bottom border
+    let borderLayer = CALayer()
+    borderLayer.frame = CGRect(x: 0, y: self.frame.height - 3, width: self.frame.width, height: 3)
+    borderLayer.backgroundColor = UIColor.black.cgColor
+    self.layer.addSublayer(borderLayer)
 
     if self.settings.showUIElements {
         self.removeCancelButton()
