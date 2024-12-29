@@ -99,26 +99,27 @@ public protocol BarcodeScannerViewDelegate {
         self.barcodeScannerInstance = nil
     }
 
-    override public func layoutSubviews() {
-        super.layoutSubviews()
+   override public func layoutSubviews() {
+    super.layoutSubviews()
 
-        self.frame = UIScreen.main.bounds
-        self.videoPreviewLayer?.frame = self.bounds
-        if self.settings.showUIElements {
-            self.removeCancelButton()
-            self.addCancelButton()
-            self.removeTorchButton()
-            self.addTorchButton()
-            self.removeDetectionAreaView()
-            self.addDetectionAreaView()
-        }
+    self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+    self.videoPreviewLayer?.frame = self.bounds
 
-        if let interfaceOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
-            let videoOrientation = interfaceOrientationToVideoOrientation(interfaceOrientation)
-            self.videoPreviewLayer?.connection?.videoOrientation = videoOrientation
-            self.videoOrientation = videoOrientation
-        }
+    if self.settings.showUIElements {
+        self.removeCancelButton()
+        self.addCancelButton()
+        self.removeTorchButton()
+        self.addTorchButton()
+        self.removeDetectionAreaView()
+        // self.addDetectionAreaView()
     }
+
+    if let interfaceOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
+        let videoOrientation = interfaceOrientationToVideoOrientation(interfaceOrientation)
+        self.videoPreviewLayer?.connection?.videoOrientation = videoOrientation
+        self.videoOrientation = videoOrientation
+    }
+}
 
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let barcodeScannerInstance = self.barcodeScannerInstance else {
