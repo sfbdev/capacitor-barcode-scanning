@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.2.1
+
+### Bug Fixes
+
+* Fixed barcode scanner view layout and UI elements positioning
+
 ## 6.2.0
 
 ### Minor Changes
